@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>10086 Data Vis</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js" charset="utf-8"></script>
+    <link rel="stylesheet" type="text/css"
+      href="https://fonts.googleapis.com/css?family=Open+Sans:400,600">
+	  
+    <link rel="stylesheet" type="text/css" href="10086.css"/>
+  </head>
+  
+  <body>
+    <div id="main">
+      <div id="sequence"></div>
+      <div id="chart">
+        <div id="explanation" style="visibility: hidden;">
+		  数据使用量：<br>
+          <span id="percentage1"></span><br/><br>
+          占全体数据流量比例：<br>
+		  <span id="percentage"></span><br/>
+		  （数据标签见左上角）
+        </div>
+      </div>
+    </div>
+	
+    <div id="sidebar">
+	  当前：<br>
+	  &nbsp;&nbsp;&nbsp;类型-社区<br>
+	  其他：<br>
+	  <a href="CT.html">&nbsp;&nbsp;&nbsp;社区-类型</a><br>
+	  <a href="index.html">&nbsp;&nbsp;&nbsp;社区-类型-用户</a><br>
+	  <a href="TCU.html">&nbsp;&nbsp;&nbsp;类型-社区-用户</a><br>
+	  <div id="legend" style="visibility: hidden;"></div>
+	</div>
+	
+    <script type="text/javascript" src="10086.js"></script>
+    <script type="text/javascript">
+      d3.select(self.frameElement).style("height", "700px");
+	  d3.text("TC.csv", function(text) {
+		  var csv = d3.csv.parseRows(text);
+		  var json = buildHierarchy(csv);
+		  createVisualization(json);
+		});
+	</script> 
+  </body>
+  
+</html>
